@@ -1,21 +1,26 @@
-/**
- *
- * Write a Node.js function isPrime(n) that takes an integer n as an argument and returns true if n is a prime number and false otherwise.
- *
- */
-function isPrime(n) {
-  if (n < 2) {
-    return false;
-  }
+/*
+Title: Unique Characters
 
-  for (let i = 2; i <= Math.sqrt(n); i++) {
-    if (n % i === 0) {
-      return false; 
+Description:
+Write a function named hasUniqueCharacters that takes a string as input and returns true if the string contains all unique characters, and false otherwise. You can assume that the string contains only lowercase alphabets (a-z).
+
+Example:
+console.log(hasUniqueCharacters("abcdefg")); // Output: true
+console.log(hasUniqueCharacters("hello")); // Output: false
+*/
+
+function hasUniqueCharacters(str) {
+  let charSet = {};
+
+  for (let char of str) {
+    if (charSet[char]) {
+      return false;
     }
-  }
 
+    charSet[char] = true;
+  }
   return true;
 }
 
-console.log(isPrime(10));
-console.log(isPrime(43));
+console.log(hasUniqueCharacters("abcdefg"));
+console.log(hasUniqueCharacters("hello"));
