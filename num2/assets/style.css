@@ -1,0 +1,43 @@
+* {
+  font-family: "Arial", sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+h1,
+p {
+  color: #333;
+}
+
+.top-paragraph {
+  text-align: justify;
+  width: 50rem;
+  margin: auto;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.card {
+  width: 13.5rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+
+.card img {
+  width: 11rem;
+}
+
+.card-title,
+.card-description {
+  margin: 10px 0;
+}
