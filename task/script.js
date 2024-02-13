@@ -12,45 +12,54 @@ function purchaseBook(
   creditDuration
 ) {
   let booksPurchased = 0;
-  const purchaseDetails = [];
+  let repurchased = "";
 
-  for (let i = 0; i < amountPurchased; i++) {
-    if (i === amountStock) {
-      break;
-    }
-    booksPurchased += value.price;
+  if (amountPurchased < amountStock) {
+    booksPurchased = value.price * amountPurchased;
+    repurchased = "Book can be purchased again";
+  } else {
+    booksPurchased = value.price * amountStock;
+    repurchased = "Book is currently sold, cannot be purchased again";
   }
+  console.log("-----------------------------");
+  console.log("Total Price = " + booksPurchased);
 
-  purchaseDetails.push("Total Price = " + booksPurchased);
   let totalDiscount = (booksPurchased * discount) / 100;
-  purchaseDetails.push("Amount of discount = " + totalDiscount);
+  console.log("Amount of discount = " + totalDiscount);
+
   let price = booksPurchased - totalDiscount;
-  purchaseDetails.push("Price after discount = " + price);
+  console.log("Price after discount = " + price);
 
   let totalTax = (price * tax) / 100;
-  purchaseDetails.push("Amount of tax = " + totalTax);
+  console.log("Amount of tax = " + totalTax);
+
   let priceFinal = price - totalTax;
-  purchaseDetails.push("Price after tax = " + priceFinal);
+  console.log("Price after tax = " + priceFinal);
 
-  if (amountPurchased >= amountStock) {
-    purchaseDetails.push("Book is currently sold; cannot be purchased again");
-  } else {
-    purchaseDetails.push("Book can be purchased again");
-  }
+  console.log("-----------------------------");
+  console.log(repurchased);
+  console.log("-----------------------------");
+  console.log("DUE DATE AND PAYMENT/MONTH");
 
-  // Calculate due dates for each month starting from the next month
   const currentDate = new Date();
-  for (let i = 1; i <= creditDuration; i++) {
+  // currentDate.setMonth(11)
+  // currentDate.setDate(29)
+  // console.log(currentDate.getMonth())
+  const creditDetails = Array.from({ length: creditDuration }, (_, i) => {
     const dueDate = new Date(
       currentDate.getFullYear(),
-      currentDate.getMonth() + i,
+      currentDate.getMonth() + i + 1,
       currentDate.getDate()
     );
-    purchaseDetails.push(`Due date for month ${i}: ${dueDate.toDateString()}`);
-  }
+    return {
+      month: i + 1,
+      dueDate: dueDate.toDateString(),
+      pricePerMonth: priceFinal / creditDuration,
+    };
+  });
 
-  return purchaseDetails;
+  return creditDetails;
 }
 
-let result = purchaseBook(book, 30, 10, 4, 4, 6);
+let result = purchaseBook(book, 30, 10, 4, 5, 10);
 console.log(result);

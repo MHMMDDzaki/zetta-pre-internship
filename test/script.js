@@ -1,23 +1,37 @@
 /**
- * write a function that returns true if there's duplicate in the array, and false otherwise.
- * SEE EXAMPLE BELLOW!
- * 
- * 
-Example
-console.log(containsDuplicate([1, 2, 3, 1])); // Output: true
-console.log(containsDuplicate([1, 2, 3, 4])); // Output: false
-console.log(containsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])); // Output: true
+ * write a function that returns the majority element.
+ * The majority element is the element that appears more than other element.
+ * READ EXAMPLE BELOW!
 
- * Determines if the array contains any duplicate value.
+console.log(majorityElement([3, 2, 3])); // Output: 3 
+console.log(majorityElement([2, 2, 1, 1, 1, 2, 2])); // Output: 2 
+
+ * You may assume that the majority element always exists in the array.
+
+ * Returns the majority element from the input array of integers.
 
  * @param {number[]} nums - The input array of integers.
- * @return {boolean} Returns true if the array contains any duplicate value, false otherwise.
+ * @return {number} Returns the majority element.
  */
-function containDuplicate(nums) {
- // Your logic here
- return new Set(nums).size !== nums.length;
+
+function majorityElement(nums) {
+  let count = 0;
+  let majorityCandidate = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    if (count === 0) {
+      majorityCandidate = nums[i];
+    }
+
+    if (nums[i] === majorityCandidate) {
+      count = count + 1;
+    } else {
+      count = count - 1;
+    }
+  }
+
+  return majorityCandidate;
 }
 
-console.log(containDuplicate([1, 2, 3, 1]));
-console.log(containDuplicate([1, 2, 3, 4])); 
-console.log(containDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2]));
+// console.log(majorityElement([3,2,3,2,3,1,4,3,2,5,3,6,3]));
+console.log(majorityElement([2, 2, 1, 1, 1, 2, 2, 1]));
