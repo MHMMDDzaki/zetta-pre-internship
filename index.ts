@@ -2,6 +2,7 @@ type FindWord = {
   value: string;
   first_index: number;
   last_index: number;
+  tes_array: string[];
 };
 
 function findWord(parameter: FindWord): string {
